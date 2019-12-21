@@ -1,0 +1,33 @@
+<MenuBar>
+	<Menu name="Sudoku">
+		<Menu name="About Sudoku"/>
+		<Menu type="divider"/>
+		<Menu name="Hide Sudoku"/>
+		<Menu name="Hide Others"/>
+		<Menu name="Show All" disabled="1"/>
+		<Menu type="divider"/>
+		<Menu name="Quit Sudoku" shell="win -c"/>
+	</Menu>
+	<Menu name="Play">
+		<Menu name="New Game" click="new-game"/>
+		<Menu name="Difficulty&#8230;">
+			<Menu name="Easy" check-group="sudoku-game-level" click="set-game-level" arg="1" is-checked="1"/>
+			<Menu name="Medium" check-group="sudoku-game-level" click="set-game-level" arg="2"/>
+			<Menu name="Hard" check-group="sudoku-game-level" click="set-game-level" arg="3"/>
+			<Menu name="Expert" check-group="sudoku-game-level" click="set-game-level" arg="4"/>
+		</Menu>
+		<Menu type="divider"/>
+		<Menu name="Show Hint" click="show-hint"/>
+		<Menu name="Solve Game" click="solve"/>
+		<Menu name="Clear Entered" click="clear-user-numbers"/>
+		<Menu type="divider"/>
+		<Menu name="Show Available" click="toggle-available" is-checked="1"/>
+	</Menu>
+	<Menu name="Help">
+		<Menu name="How To Play" shell="win -h"/>
+		<Menu type="divider"/>
+		<Menu name="Source Code"/>
+		<Menu type="divider"/>
+		<Menu name="License"/>
+	</Menu>
+</MenuBar>

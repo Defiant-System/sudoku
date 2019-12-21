@@ -1,0 +1,10 @@
+<CaptionToolBar>
+	<Group>
+		<Options>
+			<Tool name="Easy" click="set-game-level" arg="1" state="active"/>
+			<Tool name="Medium" click="set-game-level" arg="2"/>
+			<Tool name="Hard" click="set-game-level" arg="3"/>
+			<Tool name="Expert" click="set-game-level" arg="4"/>
+		</Options>
+	</Group>
+</CaptionToolBar>

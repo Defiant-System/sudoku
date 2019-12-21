@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500">
+	<filter x="-6.1%" y="-3.9%" width="112.1%" height="113.2%" filterUnits="objectBoundingBox" id="sudoku-filter-1">
+		<feOffset dx="0" dy="8" in="SourceAlpha" result="sudokuShadowOffsetOuter1"></feOffset>
+		<feGaussianBlur stdDeviation="8" in="sudokuShadowOffsetOuter1" result="sudokuShadowBlurOuter1"></feGaussianBlur>
+		<feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="sudokuShadowBlurOuter1" result="sudokuShadowMatrixOuter1"></feColorMatrix>
+		<feMerge>
+			<feMergeNode in="sudokuShadowMatrixOuter1"></feMergeNode>
+			<feMergeNode in="SourceGraphic"></feMergeNode>
+		</feMerge>
+	</filter>
+	<filter x="-6.1%" y="-3.9%" width="112.1%" height="113.2%" filterUnits="objectBoundingBox" id="sudoku-filter-2">
+		<feOffset dx="0" dy="4" in="SourceAlpha" result="sudokuShadowOffsetOuter1"></feOffset>
+		<feGaussianBlur stdDeviation="4" in="sudokuShadowOffsetOuter1" result="sudokuShadowBlurOuter1"></feGaussianBlur>
+		<feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0" type="matrix" in="sudokuShadowBlurOuter1" result="sudokuShadowMatrixOuter1"></feColorMatrix>
+		<feMerge>
+			<feMergeNode in="sudokuShadowMatrixOuter1"></feMergeNode>
+			<feMergeNode in="SourceGraphic"></feMergeNode>
+		</feMerge>
+	</filter>
+	<linearGradient id="defapp_2_" gradientUnits="userSpaceOnUse" x1="250" y1="14.4346" x2="250" y2="473.5659">
+		<stop offset="0" style="stop-color:#fc0"/>
+		<stop offset="1" style="stop-color:#da0"/>
+	</linearGradient>
+	<linearGradient id="sudoku-gradient-1" gradientUnits="userSpaceOnUse" x1="50" y1="250" x2="450" y2="250">
+		<stop  offset="0" style="stop-color:#999"/>
+		<stop  offset="0.17" style="stop-color:#eee"/>
+		<stop  offset="0.83" style="stop-color:#eee"/>
+		<stop  offset="1" style="stop-color:#999"/>
+	</linearGradient>
+
+	<path fill="url(#defapp_2_)" filter="url(#sudoku-filter-1)" d="M480,400c0,44.183-35.817,80-80,80H100c-44.183,0-80-35.817-80-80V100c0-44.183,35.817-80,80-80h300 c44.183,0,80,35.817,80,80V400z"/>
+	<path fill="url(#sudoku-gradient-1)" filter="url(#sudoku-filter-2)" d="M450,390c0,33.137-26.863,60-60,60H110c-33.137,0-60-26.863-60-60V110c0-33.137,26.863-60,60-60h280 c33.137,0,60,26.863,60,60V390z"/>
+	<path fill="#FFFFFF" d="M450,360c0,33.137-26.863,60-60,60H110c-33.137,0-60-26.863-60-60V110c0-33.137,26.863-60,60-60h280 c33.137,0,60,26.863,60,60V360z"/>
+	<g id="grid">
+		<line fill="none" stroke="#919191" stroke-width="5" stroke-miterlimit="10" x1="107" y1="279.396" x2="393" y2="279.396"/>
+		<line fill="none" stroke="#919191" stroke-width="5" stroke-miterlimit="10" x1="107" y1="186.223" x2="393" y2="186.223"/>
+		<line fill="none" stroke="#919191" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="107" y1="89" x2="393" y2="89"/>
+		<line fill="none" stroke="#919191" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="107" y1="375" x2="393" y2="375"/>
+		<line fill="none" stroke="#919191" stroke-width="5" stroke-miterlimit="10" x1="202.604" y1="89" x2="202.604" y2="375"/>
+		<line fill="none" stroke="#919191" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="107" y1="89" x2="107" y2="375"/>
+		<line fill="none" stroke="#919191" stroke-width="5" stroke-linecap="round" stroke-miterlimit="10" x1="393" y1="89" x2="393" y2="375"/>
+		<line fill="none" stroke="#919191" stroke-width="5" stroke-miterlimit="10" x1="295.776" y1="89" x2="295.776" y2="375"/>
+	</g>
+	<g id="nrs">
+		<path fill="#1593FC" d="M171.375,154.378h-5.846V165.5h-9.945v-11.121h-20.46v-8.875l18.999-31.367h11.406v32.294h5.846V154.378z M155.584,146.43v-22.262l-12.9,22.262H155.584z"/>
+		<path fill="#1593FC" d="M253.469,126.825c0-0.832-0.32-1.747-0.962-2.745c-1.094-1.616-2.745-2.424-4.955-2.424 c-3.303,0-5.656,1.854-7.058,5.561c-0.761,2.044-1.283,5.062-1.568,9.054c1.259-1.497,2.721-2.59,4.384-3.279 c1.663-0.689,3.564-1.034,5.703-1.034c4.586,0,8.346,1.557,11.281,4.669c2.935,3.113,4.402,7.093,4.402,11.941 c0,4.824-1.438,9.078-4.313,12.761c-2.875,3.684-7.343,5.525-13.402,5.525c-6.511,0-11.312-2.721-14.4-8.163 c-2.4-4.253-3.6-9.743-3.6-16.468c0-3.944,0.166-7.152,0.499-9.624c0.594-4.396,1.747-8.056,3.458-10.979 c1.473-2.495,3.404-4.503,5.792-6.024c2.388-1.521,5.245-2.281,8.572-2.281c4.8,0,8.626,1.229,11.478,3.689 c2.852,2.459,4.455,5.733,4.812,9.82H253.469z M241.421,155.947c1.497,1.759,3.398,2.638,5.703,2.638 c2.257,0,4.033-0.849,5.329-2.549c1.295-1.698,1.942-3.903,1.942-6.612c0-3.018-0.736-5.329-2.21-6.933 c-1.474-1.604-3.279-2.406-5.417-2.406c-1.735,0-3.268,0.523-4.598,1.568c-1.996,1.545-2.994,4.04-2.994,7.485 C239.176,151.919,239.924,154.188,241.421,155.947z"/>
+		<path fill="#1593FC" d="M327.091,329.293c1.311-2.352,3.229-4.122,5.756-5.311c-2.505-1.663-4.133-3.463-4.884-5.4 c-0.751-1.936-1.127-3.748-1.127-5.436c0-3.754,1.417-6.956,4.251-9.606c2.834-2.649,6.835-3.974,12.003-3.974 s9.169,1.324,12.003,3.974c2.834,2.65,4.251,5.853,4.251,9.606c0,1.688-0.374,3.5-1.123,5.436 c-0.748,1.938-2.37,3.618-4.865,5.044c2.555,1.426,4.477,3.315,5.766,5.667c1.289,2.354,1.934,4.979,1.934,7.878 c0,4.349-1.611,8.05-4.835,11.104c-3.223,3.054-7.725,4.58-13.505,4.58c-5.779,0-10.156-1.526-13.13-4.58s-4.46-6.755-4.46-11.104 C325.125,334.271,325.78,331.646,327.091,329.293z M337.654,342.41c1.318,1.402,3.143,2.104,5.472,2.104 c2.328,0,4.152-0.701,5.471-2.104c1.319-1.401,1.979-3.373,1.979-5.916c0-2.639-0.672-4.64-2.014-6.007 c-1.343-1.366-3.154-2.05-5.436-2.05s-4.094,0.684-5.437,2.05c-1.343,1.367-2.014,3.368-2.014,6.007 C335.676,339.037,336.335,341.009,337.654,342.41z M338.301,318.885c1.155,1.189,2.758,1.783,4.807,1.783 c2.073,0,3.676-0.594,4.808-1.783c1.132-1.188,1.698-2.721,1.698-4.598c0-2.043-0.566-3.641-1.698-4.794 c-1.132-1.152-2.734-1.729-4.808-1.729c-2.049,0-3.651,0.577-4.807,1.729c-1.156,1.153-1.733,2.751-1.733,4.794 C336.567,316.164,337.145,317.697,338.301,318.885z"/>
+	</g>
+	<g id="pencil" filter="url(#sudoku-filter-1)">
+		<path fill="#BCBCBC" d="M398.519,162.932l17.276-17.156c9.542-9.476,9.597-24.893,0.12-34.434l-34.317-34.555 c-9.475-9.541-24.892-9.594-34.433-0.119l-17.276,17.157L398.519,162.932z"/>
+		<path fill="#7F7F7F" d="M398.519,162.932l17.276-17.156c9.542-9.476,9.597-24.893,0.12-34.434l-17.158-17.277 c0,0-7.734,7.682-17.277,17.158l-17.276,17.157L398.519,162.932z"/>
+		<path fill="#AFAFAF" d="M381.361,145.657l17.276-17.158c9.541-9.476,15.314-19.133,5.839-28.675L393.04,88.305 c-9.477-9.541-19.175-3.835-28.716,5.64l-17.277,17.157L381.361,145.657z"/>
+		<rect x="237.184" y="95.778" transform="matrix(0.7047 0.7096 -0.7096 0.7047 230.7156 -141.959)" fill="#E8AD56" width="97.395" height="220.765"/>
+		<rect x="292.526" y="118.813" transform="matrix(0.7047 0.7096 -0.7096 0.7047 253.8184 -151.3885)" fill="#B77916" width="32.467" height="220.766"/>
+		<polyline fill="#D8932E" points="347.047,111.102 381.361,145.657 224.717,301.218 190.402,266.664 "/>
+		<polygon fill="#FFB600" points="135.387,355.618 173.301,249.446 241.816,318.437 "/>
+		<polygon points="135.387,355.618 148.741,318.218 172.876,342.521 "/>
+		<rect x="312.351" y="127.032" transform="matrix(0.7047 0.7096 -0.7096 0.7047 199.9253 -217.3163)" fill="#F4F4F4" width="97.313" height="8.929"/>
+		<rect x="333.132" y="135.701" transform="matrix(0.7047 0.7095 -0.7095 0.7047 208.6154 -220.8628)" fill="#E0E0E0" width="72.967" height="8.927"/>
+		<rect x="374.61" y="152.948" transform="matrix(0.7046 0.7096 -0.7096 0.7046 225.9182 -227.9249)" fill="#BCBCBC" width="24.267" height="8.928"/>
+	</g>
+</svg>
