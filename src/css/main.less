@@ -1,7 +1,7 @@
 
 background: transparent;
 
-@sprite: url('~/res/img/box.png');
+@sprite: url('~/img/box.png');
 
 content {
 	position: absolute;
@@ -31,7 +31,7 @@ content {
 		width: 60px;
 		height: 60px;
 		padding-top: 9px;
-		.transitionWhat(background, 90ms);
+		transition: background 90ms;
 
 		&.pnr {
 			color: #79594070;
@@ -61,15 +61,15 @@ content {
 		margin: -4px 0px 0px -4px;
 		text-align: center;
 		cursor: pointer;
-		.transitionWhat(filter, 150ms);
+		transition: filter 150ms;
 		transition-property: transform;
 
 		&.appear {
-			.animation(appear 120ms ease);
+			animation: appear 120ms ease;
 		}
 
 		&.disappear {
-			.animation(disappear 120ms ease forwards);
+			animation: disappear 120ms ease forwards;
 		}
 
 		span {
@@ -110,7 +110,7 @@ content {
 		text-shadow: 0 1px 0 rgba(0,0,0,0.5);
 		filter: drop-shadow(0 2px 3px rgba(0,0,0,0.35));
 		animation: hover-v 1600ms ease-in-out infinite, hover-h 700ms ease-in-out infinite;
-		.transitionWhat(opacity, 200ms);
+		transition: opacity 200ms;
 
 		&:before {
 			content: "";
@@ -145,24 +145,24 @@ content {
 	}
 }
 
-.keyframes(hover-v; {
+@keyframes hover-v {
 	0%   { margin-top: -1px; }
 	50%  { margin-top: 1px; }
 	100% { margin-top: -1px; }
-});
+}
 
-.keyframes(hover-h; {
+@keyframes hover-h {
 	0%   { margin-left: 3px; }
 	50%  { margin-left: -3px; }
 	100% { margin-left: 3px; }
-});
+}
 
-.keyframes(appear; {
-	0%   { opacity: 0; .transform( scale(0) ); }
-	100% { opacity: 1; .transform( scale(1) ); }
-});
+@keyframes appear {
+	0%   { opacity: 0; transform: scale(0); }
+	100% { opacity: 1; transform: scale(1); }
+}
 
-.keyframes(disappear; {
-	0%   { opacity: 1; .transform( scale(1) ); }
-	100% { opacity: 0; .transform( scale(0) ); }
-});
+@keyframes disappear {
+	0%   { opacity: 1; transform: scale(1); }
+	100% { opacity: 0; transform: scale(0); }
+}
