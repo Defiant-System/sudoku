@@ -24,7 +24,7 @@
 		<Menu name="Show Available" click="toggle-available" is-checked="1"/>
 	</Menu>
 	<Menu name="Help">
-		<Menu name="How To Play" shell="win -h"/>
+		<Menu name="How To Play" click="open-help"/>
 		<Menu type="divider"/>
 		<Menu name="Source Code"/>
 		<Menu type="divider"/>
