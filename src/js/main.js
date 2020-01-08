@@ -44,6 +44,9 @@ const sudoku = {
 				self.boxes.removeClass("hover");
 				break;
 			// custom events
+			case "open-help":
+				defiant.shell("fs -u '~/help/index.md'");
+				break;
 			case "focus-box":
 				if (gameOver) return;
 				el = $(event.target);
