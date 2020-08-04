@@ -1,6 +1,6 @@
 <MenuBar>
 	<Menu name="Sudoku">
-		<Menu name="About Sudoku"/>
+		<Menu name="About Sudoku" shell="win -a"/>
 		<Menu type="divider"/>
 		<Menu name="Hide Sudoku"/>
 		<Menu name="Hide Others"/>
