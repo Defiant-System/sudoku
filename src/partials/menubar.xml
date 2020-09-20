@@ -2,10 +2,6 @@
 	<Menu name="Sudoku">
 		<Menu name="About Sudoku" shell="win -a"/>
 		<Menu type="divider"/>
-		<Menu name="Hide Sudoku"/>
-		<Menu name="Hide Others"/>
-		<Menu name="Show All" disabled="1"/>
-		<Menu type="divider"/>
 		<Menu name="Quit Sudoku" shell="win -c"/>
 	</Menu>
 	<Menu name="Play">
