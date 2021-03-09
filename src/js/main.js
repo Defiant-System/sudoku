@@ -93,7 +93,8 @@ const sudoku = {
 			row2,
 			col1,
 			col2,
-			tmpMatrix;
+			tmpMatrix,
+			tmpMatrixValue;
 
 		for (let y=0; y<9; y++) {
 			secs[y] = [];
