@@ -5,6 +5,9 @@ let level = 1,
 	displayOnlyAvailable = true,
 	countSquares = [35, 34, 31, 29];
 
+let pgn = `1p1,3u2,2e0,6e0,5e0,4e0,7e0,9p9,8p8,7e0,9e0,8e0,3p3,2p2,1p1,4p4,6e0,5e0,4p4,6e0,5p5,9p9,8e0,7e0,1e0,3e0,2p2,5e0,7p7,6e0,1e0,9p9,8e0,2e0,4e0,3p3,2e0,4p4,3e0,7p7,6e0,5e0,8p8,1p1,9p9,8p8,1p1,9e0,4p4,3p3,2e0,5e0,7e0,6e0,3p3,5e0,4p4,8p8,7p7,6p6,9e0,2e0,1p1,9p9,2e0,1e0,5e0,4e0,3e0,6e0,8p8,7p7,6e0,8e0,7p7,2p2,1e0,9e0,3e0,5p5,4e0`;
+
+
 const sudoku = {
 	init() {
 		// fast references
@@ -17,14 +20,19 @@ const sudoku = {
 		// bind event handlers
 		this.gameboard.on("mouseover mouseout", ".box", this.dispatch);
 
-		this.dispatch({type: "set-game-level", arg: level});
+		// temp
+		// return setTimeout(() => this.dispatch({ type: "output-pgn" }), 300);
+		return setTimeout(() => this.dispatch({ type: "game-from-pgn" }), 300);
+
+		// this.dispatch({type: "set-game-level", arg: level});
 		//this.showHint();
 	},
 	dispatch(event) {
-		let self = sudoku,
+		let Self = sudoku,
 			index,
 			col,
 			row,
+			str,
 			el;
 		switch (event.type) {
 			// native events
@@ -35,13 +43,13 @@ const sudoku = {
 				row = index % 9;
 				
 				for (let i=0; i<9; i++) {
-					self.boxes.get(col * 9 + i).addClass("hover");
-					self.boxes.get(i * 9 + row).addClass("hover");
+					Self.boxes.get(col * 9 + i).addClass("hover");
+					Self.boxes.get(i * 9 + row).addClass("hover");
 				}
 				el.removeClass("hover");
 				break;
 			case "mouseout":
-				self.boxes.removeClass("hover");
+				Self.boxes.removeClass("hover");
 				break;
 			// custom events
 			case "open-help":
@@ -51,12 +59,33 @@ const sudoku = {
 				if (gameOver) return;
 				el = $(event.target);
 				if (!el.hasClass("box")) el = el.parent();
-				self.focusSquare(el);
+				Self.focusSquare(el);
 				break;
 			case "select-nr":
 				el = $(event.target);
-				self.selectNumber(el);
+				Self.selectNumber(el);
 				break;
+
+			case "game-from-pgn":
+				Self.drawBoard(pgn.split(","));
+				// pgn.split(",").map(c => {
+				// 	console.log(c);
+				// });
+				break;
+			case "output-pgn":
+				str = [];
+				Self.gameboard.find(".box").map(elem => {
+					let el = $(elem),
+						val = el.attr("_nr"),
+						num = el.text().trim() || "0",
+						type = "e";
+					if (el.hasClass("pnr")) type = "p";
+					if (el.hasClass("unr")) type = "u";
+					str.push(val + type + num);
+				});
+				console.log(str.join(","));
+				break;
+
 			case "show-hint":
 				this.showHint();
 				break;
@@ -76,16 +105,16 @@ const sudoku = {
 				level = event.arg || 1;
 				/* fall through */
 			case "new-game":
-				self.hideHints(true);
+				Self.hideHints(true);
 				gameOver = false;
-				self.gameboard.html("");
-				self.drawBoard();
+				Self.gameboard.html("");
+				Self.drawBoard();
 
-				self.content.prop({className: "level-"+ level});
+				Self.content.prop({className: "level-"+ level});
 				break;
 		}
 	},
-	drawBoard() {
+	drawBoard(pgn) {
 		let secs = [],
 			matrix = [],
 			number,
@@ -96,53 +125,71 @@ const sudoku = {
 			tmpMatrix,
 			tmpMatrixValue;
 
-		for (let y=0; y<9; y++) {
-			secs[y] = [];
-			matrix[y] = [];
-			for (let x=0; x<9; x++) {
-				number = x / 1 + 1 + (y * 3) + Math.floor(y / 3) % 3;
-				number = (number > 9) ? number % 9 : number ;
-				number = (number == 0) ? 9 : number ;
-				matrix[y][x] = number;
+		if (pgn) {
+			for (let y=0; y<9; y++) {
+				secs[y] = [];
+				matrix[y] = [];
+				for (let x=0; x<9; x++) {
+					let c = pgn[(y*9)+x].split("");
+					matrix[y][x] = c[0];
+				}
 			}
-		}
-		for (let n1=0; n1<9; n1+=3) {
-			for (let n2=0; n2<3; n2++) {
-				row1 = Math.floor(Math.random() * 3);
-				row2 = Math.floor(Math.random() * 3);
-				while (row2 === row1) {
+		} else {
+			for (let y=0; y<9; y++) {
+				secs[y] = [];
+				matrix[y] = [];
+				for (let x=0; x<9; x++) {
+					number = x / 1 + 1 + (y * 3) + Math.floor(y / 3) % 3;
+					number = (number > 9) ? number % 9 : number ;
+					number = (number == 0) ? 9 : number ;
+					matrix[y][x] = number;
+				}
+			}
+			for (let n1=0; n1<9; n1+=3) {
+				for (let n2=0; n2<3; n2++) {
+					row1 = Math.floor(Math.random() * 3);
 					row2 = Math.floor(Math.random() * 3);
+					while (row2 === row1) {
+						row2 = Math.floor(Math.random() * 3);
+					}
+					row1 = row1 + n1;
+					row2 = row2 + n1;
+					tmpMatrix = [];
+					tmpMatrix = matrix[row1];
+					matrix[row1] = matrix[row2];
+					matrix[row2] = tmpMatrix;
 				}
-				row1 = row1 + n1;
-				row2 = row2 + n1;
-				tmpMatrix = [];
-				tmpMatrix = matrix[row1];
-				matrix[row1] = matrix[row2];
-				matrix[row2] = tmpMatrix;
 			}
-		}
-		for (let n1=0; n1<9; n1+=3) {
-			for (let n2=0; n2<3; n2++) {
-				col1 = Math.floor(Math.random() * 3);
-				col2 = Math.floor(Math.random() * 3);
-				while (col2 === col1) {
+			for (let n1=0; n1<9; n1+=3) {
+				for (let n2=0; n2<3; n2++) {
+					col1 = Math.floor(Math.random() * 3);
 					col2 = Math.floor(Math.random() * 3);
-				}
-				col1 = col1 + n1;
-				col2 = col2 + n1;
-				tmpMatrix = [];
+					while (col2 === col1) {
+						col2 = Math.floor(Math.random() * 3);
+					}
+					col1 = col1 + n1;
+					col2 = col2 + n1;
+					tmpMatrix = [];
 
-				for (let n3=0; n3<matrix.length; n3++) {
-					tmpMatrixValue = matrix[n3][col1];
-					matrix[n3][col1] = matrix[n3][col2];
-					matrix[n3][col2] = tmpMatrixValue;
-				}
-			}	
+					for (let n3=0; n3<matrix.length; n3++) {
+						tmpMatrixValue = matrix[n3][col1];
+						matrix[n3][col1] = matrix[n3][col2];
+						matrix[n3][col2] = tmpMatrixValue;
+					}
+				}	
+			}
 		}
 
 		matrix.map((x, xI) => {
 			x.map((y, yI) => {
-				let box = this.gameboard.append(`<div class="box" _nr="${matrix[xI][yI]}"></div>`);
+				let c = pgn[(xI*9)+yI].split(""),
+					cN = "",
+					num = "";
+				if ("pu".includes(c[1])) {
+					cN = c[1] +"nr";
+					num = c[2];
+				}
+				let box = this.gameboard.append(`<div class="box ${cN}" _nr="${matrix[xI][yI]}">${num}</div>`);
 				secs[parseInt(xI / 3) + parseInt(yI / 3)].push(box);
 			});
 		});
@@ -165,7 +212,7 @@ const sudoku = {
 
 		this.boxes = this.gameboard.find(".box");
 
-		this.showColumnsInGroup();
+		if (!pgn) this.showColumnsInGroup();
 	},
 	showColumnsInGroup() {
 		let cellsRevealed = [],
