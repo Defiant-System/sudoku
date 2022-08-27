@@ -5,7 +5,16 @@ let level = 1,
 	displayOnlyAvailable = true,
 	countSquares = [35, 34, 31, 29];
 
-let pgn = `1p1,3u2,2e0,6e0,5e0,4e0,7e0,9p9,8p8,7e0,9e0,8e0,3p3,2p2,1p1,4p4,6e0,5e0,4p4,6e0,5p5,9p9,8e0,7e0,1e0,3e0,2p2,5e0,7p7,6e0,1e0,9p9,8e0,2e0,4e0,3p3,2e0,4p4,3e0,7p7,6e0,5e0,8p8,1p1,9p9,8p8,1p1,9e0,4p4,3p3,2e0,5e0,7e0,6e0,3p3,5e0,4p4,8p8,7p7,6p6,9e0,2e0,1p1,9p9,2e0,1e0,5e0,4e0,3e0,6e0,8p8,7p7,6e0,8e0,7p7,2p2,1e0,9e0,3e0,5p5,4e0`;
+let pgn = `Level:1--
+			1p1,3u3,2u2,6u6,5u5,4u4,7u7,9p9,8p8,
+			7u7,9u9,8u8,3p3,2p2,1p1,4p4,6u6,5u5,
+			4p4,6u6,5p5,9p9,8u8,7u7,1u1,3u3,2p2,
+			5u5,7p7,6u6,1u1,9p9,8u8,2u2,4u4,3p3,
+			2u2,4p4,3u3,7p7,6e0,5u5,8p8,1p1,9p9,
+			8p8,1p1,9u9,4p4,3p3,2u2,5u5,7u7,6u6,
+			3p3,5u5,4p4,8p8,7p7,6p6,9u9,2u2,1p1,
+			9p9,2u2,1u1,5u5,4u4,3u3,6u6,8p8,7p7,
+			6u6,8u8,7p7,2p2,1u1,9u9,3u3,5p5,4u4`.replace(/\t|\n/g, "");
 
 
 const sudoku = {
@@ -24,7 +33,7 @@ const sudoku = {
 		// return setTimeout(() => this.dispatch({ type: "output-pgn" }), 300);
 		return setTimeout(() => this.dispatch({ type: "game-from-pgn" }), 300);
 
-		// this.dispatch({type: "set-game-level", arg: level});
+		this.dispatch({type: "set-game-level", arg: level});
 		//this.showHint();
 	},
 	dispatch(event) {
@@ -67,10 +76,15 @@ const sudoku = {
 				break;
 
 			case "game-from-pgn":
-				Self.drawBoard(pgn.split(","));
-				// pgn.split(",").map(c => {
-				// 	console.log(c);
-				// });
+				str = pgn.split("--");
+				level = str[0].split(":")[1];
+
+				// reset toolbar
+				window.find(".toolbar-tool_").removeClass("tool-active_");
+				window.find(`.toolbar-tool_[data-arg="${level}"]`).addClass("tool-active_");;
+				Self.content.prop({ className: "level-"+ str[0].split(":")[1] });
+
+				Self.drawBoard(str[1].split(","));
 				break;
 			case "output-pgn":
 				str = [];
@@ -110,8 +124,8 @@ const sudoku = {
 				Self.gameboard.html("");
 				Self.drawBoard();
 
-				Self.content.prop({className: "level-"+ level});
-				break;
+				Self.content.prop({ className: "level-"+ level });
+				return true;
 		}
 	},
 	drawBoard(pgn) {
@@ -182,7 +196,7 @@ const sudoku = {
 
 		matrix.map((x, xI) => {
 			x.map((y, yI) => {
-				let c = pgn[(xI*9)+yI].split(""),
+				let c = pgn ? pgn[(xI*9)+yI].split("") : "",
 					cN = "",
 					num = "";
 				if ("pu".includes(c[1])) {
@@ -325,7 +339,7 @@ const sudoku = {
 		let all_ok = true;
 
 		this.gameboard.find(".box").map(item => {
-			if (+item.innerHTML != +item.getAttribute("_nr")) {
+			if (item.innerHTML != item.getAttribute("_nr")) {
 				all_ok = false;
 			}
 		});
