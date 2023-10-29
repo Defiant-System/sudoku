@@ -1,12 +1,12 @@
 <Application>
 	<Head>
 		<meta name="id" value="sudoku"/>
-		<meta name="title" value="Sudoku" version="1.41"/>
+		<meta name="title" value="Sudoku" version="1.42"/>
 		<meta name="author" value="Hakan Bilgin" namespace="ant"/>
 		<meta name="license" value="AGPL-3.0-or-later"/>
 		<meta name="repository" value="https://github.com/Defiant-System/sudoku"/>
 		<meta name="width" value="544"/>
-		<meta name="height" value="545"/>
+		<meta name="height" value="544"/>
 		<meta name="top" value="130"/>
 		<meta name="left" value="290"/>
 		<meta name="minimize"/>
